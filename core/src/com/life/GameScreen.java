@@ -93,17 +93,23 @@ public class GameScreen implements Screen, InputProcessor {
         world.setContactListener(new ContactListener() {
             @Override
             public void beginContact(Contact contact) {
-
+                //Collision with player and ground
+                if(contact.getFixtureA().getUserData() == "pgsf" || contact.getFixtureB().getUserData() == "pgsf"){
+                    player.addGroundContact();
+                }
             }
 
             @Override
             public void endContact(Contact contact) {
-
+                //Collision with player and ground
+                if(contact.getFixtureA().getUserData() == "pgsf" || contact.getFixtureB().getUserData() == "pgsf"){
+                    player.removeGroundContact();
+                }
             }
 
             @Override
             public void preSolve(Contact contact, Manifold oldManifold) {
-
+                contact.resetFriction();
             }
 
             @Override
@@ -201,11 +207,30 @@ public class GameScreen implements Screen, InputProcessor {
             }
         }
 
+        //Handle player movement
+        if(keycode == Input.Keys.LEFT){
+            player.setMovingLeft(true);
+        } else if(keycode == Input.Keys.RIGHT){
+            player.setMovingRight(true);
+        }
+        if(keycode == Input.Keys.UP || keycode == Input.Keys.Z){
+            player.setJump(true);
+        }
+
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
+        if(keycode == Input.Keys.LEFT){
+            player.setMovingLeft(false);
+        } else if(keycode == Input.Keys.RIGHT){
+            player.setMovingRight(false);
+        }
+        if(keycode == Input.Keys.UP){
+            player.setJump(false);
+        }
+
         return false;
     }
 
