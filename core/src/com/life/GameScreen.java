@@ -48,11 +48,11 @@ public class GameScreen implements Screen, InputProcessor {
 
         //create the camera and setup the viewport
         camera = new OrthographicCamera();
-        viewport = new FitViewport(24f, 16f, camera);
+        viewport = new FitViewport(10f, 10f, camera);
         viewport.apply();
 
         //set the initial position of the camera
-        camera.position.set(viewport.getWorldWidth() / 2f, viewport.getWorldHeight() / 2f + 2f, 0f);
+        camera.position.set(viewport.getWorldWidth() / 2f, viewport.getWorldHeight() / 2f, 0f);
 
         //setup box2d world
         debugRenderer = new Box2DDebugRenderer();
@@ -213,7 +213,7 @@ public class GameScreen implements Screen, InputProcessor {
         } else if(keycode == Input.Keys.RIGHT){
             player.setMovingRight(true);
         }
-        if(keycode == Input.Keys.UP || keycode == Input.Keys.Z){
+        if(keycode == Input.Keys.UP){
             player.setJump(true);
         }
 

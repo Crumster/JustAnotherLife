@@ -38,7 +38,9 @@ public class BodyBuilder {
 		world = gameScreen.getWorld();
 		map = gameScreen.getMap();
 
-		gameScreen.addEntity(new Player(gameScreen, new Vector2(0f, 0f)));
+		gameScreen.addEntity(new Player(gameScreen, new Vector2(5f, 5f)));
+
+		genBodies(map.getLayers().get("ground"));
 
 		/*
 		//Add the player to the map
