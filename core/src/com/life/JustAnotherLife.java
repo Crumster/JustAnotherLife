@@ -30,6 +30,7 @@ public class JustAnotherLife extends Game {
 
 	@Override
 	public void dispose(){
+		gameScreen.dispose();
 		batch.dispose();
 		System.out.println("JustAnotherLife Disposed");
 	}
