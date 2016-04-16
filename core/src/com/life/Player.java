@@ -23,9 +23,7 @@ public class Player extends Entity {
     private Animation idling;
     private Animation walking;
     private Animation jumping;
-
     private float stateTime;
-
     private Sprite sprite;
 
     //Action booleans
@@ -44,7 +42,7 @@ public class Player extends Entity {
 
     private float maxSpeed = 8f;
     private float speed = 2f;
-    private float direction = 1f;
+    private int direction = 1;
 
     private Vector2 spawnPoint;
 
@@ -188,7 +186,7 @@ public class Player extends Entity {
         sprite.setRegion(currentAnimation.getKeyFrame(stateTime, true));
         sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
         sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
-        if(direction == -1f){
+        if(direction == -1){
             sprite.flip(true, false);
         }
         sprite.draw(batch);
@@ -214,7 +212,7 @@ public class Player extends Entity {
      */
     public void respawn(){
         //Add a dead player
-        gameScreen.addEntity(new DeadPlayer(gameScreen, body.getPosition()));
+        gameScreen.addEntity(new DeadPlayer(gameScreen, body.getPosition(), direction));
         //Move to spawn point
         body.setLinearVelocity(new Vector2(0f, 0f));
         body.setTransform(spawnPoint, 0f);
@@ -257,7 +255,7 @@ public class Player extends Entity {
     public void setMovingLeft(boolean movingLeft) {
         this.movingLeft = movingLeft;
         if(movingLeft){
-            direction = -1f;
+            direction = -1;
         }
     }
 
@@ -268,7 +266,7 @@ public class Player extends Entity {
     public void setMovingRight(boolean movingRight) {
         this.movingRight = movingRight;
         if (movingRight) {
-            direction = 1f;
+            direction = 1;
         }
     }
 }
