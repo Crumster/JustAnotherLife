@@ -46,6 +46,11 @@ public class Player extends Entity {
     private float speed = 2f;
     private float direction = 1f;
 
+    /**
+     *
+     * @param gameScreen
+     * @param position
+     */
     public Player(GameScreen gameScreen, Vector2 position){
         super(gameScreen);
         this.world = gameScreen.getWorld();
@@ -91,6 +96,7 @@ public class Player extends Entity {
         bodyDef.fixedRotation = true;
         bodyDef.bullet = true;
 
+        //Create body in box2d world
         body = world.createBody(bodyDef);
         body.setUserData(this);
 
@@ -98,14 +104,14 @@ public class Player extends Entity {
         PolygonShape physicsShape = new PolygonShape();
         physicsShape.setAsBox(width / 2f, height / 2f);
         physicsFixture = body.createFixture(physicsShape, 1f);
-        physicsFixture.setUserData("ppf");
+        physicsFixture.setUserData(BodyIdentifiers.PLAYER);
 
         //Ground sensor shape definition
         PolygonShape groundSensorShape = new PolygonShape();
         groundSensorShape.setAsBox(width / 2.5f, height / 10f, new Vector2(0f, -height / 2f), 0f);
         groundSensorFixture = body.createFixture(groundSensorShape, 0f);
         groundSensorFixture.setSensor(true);
-        groundSensorFixture.setUserData("pgsf");
+        groundSensorFixture.setUserData(BodyIdentifiers.PLAYERSENSOR);
 
         physicsShape.dispose();
         groundSensorShape.dispose();
@@ -131,6 +137,7 @@ public class Player extends Entity {
         } else{
             grounded = false;
         }
+
         //Disable friction while jumping
         if(!grounded){
             currentAnimation = jumping;

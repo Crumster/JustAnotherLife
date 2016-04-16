@@ -94,7 +94,7 @@ public class GameScreen implements Screen, InputProcessor {
             @Override
             public void beginContact(Contact contact) {
                 //Collision with player and ground
-                if(contact.getFixtureA().getUserData() == "pgsf" || contact.getFixtureB().getUserData() == "pgsf"){
+                if(contact.getFixtureA().getUserData() == BodyIdentifiers.PLAYERSENSOR || contact.getFixtureB().getUserData() == BodyIdentifiers.PLAYERSENSOR){
                     player.addGroundContact();
                 }
             }
@@ -102,7 +102,7 @@ public class GameScreen implements Screen, InputProcessor {
             @Override
             public void endContact(Contact contact) {
                 //Collision with player and ground
-                if(contact.getFixtureA().getUserData() == "pgsf" || contact.getFixtureB().getUserData() == "pgsf"){
+                if(contact.getFixtureA().getUserData() == BodyIdentifiers.PLAYERSENSOR || contact.getFixtureB().getUserData() == BodyIdentifiers.PLAYERSENSOR){
                     player.removeGroundContact();
                 }
             }
