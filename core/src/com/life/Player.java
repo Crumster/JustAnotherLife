@@ -125,7 +125,9 @@ public class Player extends Entity {
 
         //Set if grounded based on ground contacts
         if(groundContacts > 0){
-            grounded = true;
+            if(!grounded && !jump) {
+                grounded = true;
+            }
         } else{
             grounded = false;
         }
@@ -157,13 +159,16 @@ public class Player extends Entity {
             body.setLinearVelocity(0f, vel.y);
         }
 
-        //NON-VARIABLE JUMPING
         //Jump if grounded
         if(jump){
-            jump = false;
             if(grounded){
-                body.applyLinearImpulse(new Vector2(0f, 15f), pos, true);
+                body.applyLinearImpulse(new Vector2(0f, 20f), pos, true);
+                grounded = false;
             }
+        }
+        //Variable Jump
+        if(vel.y > 0 && !jump){
+            body.setLinearVelocity(vel.x, vel.y / 1.2f);
         }
     }
 
@@ -181,7 +186,7 @@ public class Player extends Entity {
 
     @Override
     public void dispose() {
-        sheet.dispose();
+        //sheet.dispose();
 
         System.out.println("Player disposed");
     }
