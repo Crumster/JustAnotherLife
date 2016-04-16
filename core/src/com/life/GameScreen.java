@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -133,8 +134,11 @@ public class GameScreen implements Screen, InputProcessor {
                 iterator.remove();
             }
         }
-
         world.step(delta, 6, 2);
+
+        float lerp = 6;
+        camera.position.x += (player.getPosition().x - camera.position.x) * lerp * delta;
+        camera.position.y += (player.getPosition().y - camera.position.y) * lerp * delta;
         camera.update();
     }
 
