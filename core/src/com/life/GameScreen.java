@@ -216,6 +216,9 @@ public class GameScreen implements Screen, InputProcessor {
         if(keycode == Input.Keys.UP){
             player.setJump(true);
         }
+        if(keycode == Input.Keys.SPACE){
+            player.respawn();
+        }
 
         return false;
     }

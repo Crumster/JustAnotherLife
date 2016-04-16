@@ -46,6 +46,8 @@ public class Player extends Entity {
     private float speed = 2f;
     private float direction = 1f;
 
+    private Vector2 spawnPoint;
+
     /**
      *
      * @param gameScreen
@@ -54,6 +56,7 @@ public class Player extends Entity {
     public Player(GameScreen gameScreen, Vector2 position){
         super(gameScreen);
         this.world = gameScreen.getWorld();
+        setSpawnPoint(position);
 
         //Setup the animation
         /*
@@ -196,6 +199,25 @@ public class Player extends Entity {
         //sheet.dispose();
 
         System.out.println("Player disposed");
+    }
+
+    /**
+     * Sets the players spawn point
+     * @param position
+     */
+    public void setSpawnPoint(Vector2 position){
+        spawnPoint = position;
+    }
+
+    /**
+     * Respawns the player to its spawn point
+     */
+    public void respawn(){
+        //Add a dead player
+        gameScreen.addEntity(new DeadPlayer(gameScreen, body.getPosition()));
+        //Move to spawn point
+        body.setLinearVelocity(new Vector2(0f, 0f));
+        body.setTransform(spawnPoint, 0f);
     }
 
     /**
