@@ -10,6 +10,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Just Another Life";
 		//config.addIcon("icon/life.png", Files.FileType.Internal);
+		config.vSyncEnabled = true;
 		new LwjglApplication(new JustAnotherLife(), config);
 	}
 }
