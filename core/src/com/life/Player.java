@@ -33,6 +33,7 @@ public class Player extends Entity {
 
     //Jumping
     private boolean jump = false;
+    private boolean jumped = false;
     private boolean grounded = false;
 
     private int groundContacts = 0;
@@ -132,11 +133,12 @@ public class Player extends Entity {
 
         //Set if grounded based on ground contacts
         if(groundContacts > 0){
-            if(!grounded && !jump) {
+            if(!grounded && !jumped) {
                 grounded = true;
             }
         } else{
             grounded = false;
+            jumped = false;
         }
 
         //Disable friction while jumping
@@ -169,9 +171,10 @@ public class Player extends Entity {
 
         //Jump if grounded
         if(jump){
-            if(grounded){
+            if(grounded && !jumped){
                 body.applyLinearImpulse(new Vector2(0f, 20f), pos, true);
                 grounded = false;
+                jumped = true;
             }
         }
         //Variable Jump
