@@ -25,9 +25,9 @@ public class Camera extends OrthographicCamera {
         position.y += (target.y - position.y) * lerp * delta;
     }
 
-    public void updateShake(Vector2 center){
+    public void updateShake(Vector2 center, float delta){
         if(System.currentTimeMillis() - shakeStart < shakeDuration && System.currentTimeMillis() - timeSinceLastShake > shakeSpeed){
-            position.set(center, 0f);
+            follow(center, 8, delta);
             position.x += MathUtils.random(-shakeIntensity, shakeIntensity);
             position.y += MathUtils.random(-shakeIntensity, shakeIntensity);
 
