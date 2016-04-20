@@ -219,6 +219,7 @@ public class Player extends Entity {
         //Move to spawn point
         body.setLinearVelocity(new Vector2(0f, 0f));
         body.setTransform(spawnPoint, 0f);
+        body.setAwake(true);
     }
 
     /**
