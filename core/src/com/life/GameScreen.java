@@ -141,6 +141,7 @@ public class GameScreen implements Screen, InputProcessor {
         world.step(delta, 6, 2);
 
         camera.follow(player.getPosition(), 6, delta);
+        camera.updateShake(player.getPosition());
         camera.update();
     }
 

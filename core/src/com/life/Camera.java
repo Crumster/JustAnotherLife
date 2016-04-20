@@ -14,19 +14,6 @@ public class Camera extends OrthographicCamera {
     private long shakeStart;
     private long timeSinceLastShake;
 
-    @Override
-    public void update() {
-        //Update screen shaking
-        if(System.currentTimeMillis() - shakeStart < shakeDuration && System.currentTimeMillis() - timeSinceLastShake > shakeSpeed){
-            position.x += MathUtils.random(-shakeIntensity, shakeIntensity);
-            position.y += MathUtils.random(-shakeIntensity, shakeIntensity);
-
-            timeSinceLastShake = System.currentTimeMillis();
-        }
-
-        super.update();
-    }
-
     /**
      * Moves the camera towards a target position
      * @param target
@@ -36,6 +23,16 @@ public class Camera extends OrthographicCamera {
     public void follow(Vector2 target, float lerp, float delta){
         position.x += (target.x - position.x) * lerp * delta;
         position.y += (target.y - position.y) * lerp * delta;
+    }
+
+    public void updateShake(Vector2 center){
+        if(System.currentTimeMillis() - shakeStart < shakeDuration && System.currentTimeMillis() - timeSinceLastShake > shakeSpeed){
+            position.set(center, 0f);
+            position.x += MathUtils.random(-shakeIntensity, shakeIntensity);
+            position.y += MathUtils.random(-shakeIntensity, shakeIntensity);
+
+            timeSinceLastShake = System.currentTimeMillis();
+        }
     }
 
     /**
