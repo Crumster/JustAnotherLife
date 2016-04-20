@@ -40,9 +40,9 @@ public class Camera extends OrthographicCamera {
 
     /**
      * Start a new shake with a certain shakeIntensity and duration
-     * @param shakeIntensity
-     * @param shakeSpeed
-     * @param shakeDuration
+     * @param shakeIntensity intensity in ms
+     * @param shakeSpeed speed in ms
+     * @param shakeDuration duration in ms
      */
     public void shake(float shakeIntensity, long shakeSpeed, float shakeDuration){
         this.shakeIntensity = shakeIntensity;

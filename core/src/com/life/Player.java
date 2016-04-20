@@ -220,7 +220,7 @@ public class Player extends Entity {
         body.setLinearVelocity(new Vector2(0f, 0f));
         body.setTransform(spawnPoint, 0f);
         body.setAwake(true);
-        gameScreen.getCamera().shake(0.15f, 30, 200);
+        gameScreen.getCamera().shake(0.2f, 30, 150);
     }
 
     /**
