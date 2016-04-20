@@ -35,7 +35,7 @@ public class GameScreen implements Screen, InputProcessor {
     private OrthogonalTiledMapRenderer mapRenderer;
 
     //camera and viewport
-    private OrthographicCamera camera;
+    private Camera camera;
     private Viewport viewport;
 
     //Entities in the game
@@ -48,7 +48,7 @@ public class GameScreen implements Screen, InputProcessor {
         //float aspectRatio = (float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth();
 
         //create the camera and setup the viewport
-        camera = new OrthographicCamera();
+        camera = new Camera();
         viewport = new FitViewport(10f, 10f, camera);
         viewport.apply();
 
@@ -136,9 +136,7 @@ public class GameScreen implements Screen, InputProcessor {
         }
         world.step(delta, 6, 2);
 
-        float lerp = 6;
-        camera.position.x += (player.getPosition().x - camera.position.x) * lerp * delta;
-        camera.position.y += (player.getPosition().y - camera.position.y) * lerp * delta;
+        camera.follow(player.getPosition(), 6, delta);
         camera.update();
     }
 
@@ -222,6 +220,11 @@ public class GameScreen implements Screen, InputProcessor {
         }
         if(keycode == Input.Keys.SPACE){
             player.respawn();
+        }
+
+        //Shake testing
+        if(keycode == Input.Keys.S){
+            camera.shake(0.25f, 30, 250);
         }
 
         return false;
