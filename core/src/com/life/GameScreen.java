@@ -87,6 +87,10 @@ public class GameScreen implements Screen, InputProcessor {
         return map;
     }
 
+    public Camera getCamera(){
+        return camera;
+    }
+
     @Override
     public void show() {
         Gdx.input.setInputProcessor(this);
@@ -220,11 +224,6 @@ public class GameScreen implements Screen, InputProcessor {
         }
         if(keycode == Input.Keys.SPACE){
             player.respawn();
-        }
-
-        //Shake testing
-        if(keycode == Input.Keys.S){
-            camera.shake(0.25f, 30, 250);
         }
 
         return false;
